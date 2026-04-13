@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MomUp Studio — Stop Guessing Your Job Search</title>
+  <meta name="description" content="MomUp Studio builds your plan, rewrites your materials, and tells you exactly what to do next. $247 one-time. 30-day guarantee.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0247BB',
+            'primary-dark': '#023A9A',
+            accent: '#FF710D',
+            'accent-dark': '#E5640B',
+            cream: '#FEF9F4',
+            muted: 'hsl(210, 40%, 96.1%)',
+            'muted-fg': 'hsl(215.4, 16.3%, 46.9%)',
+            border: 'hsl(214.3, 31.8%, 91.4%)',
+          },
+          fontFamily: {
+            heading: ['"Lora"', 'serif'],
+            body: ['"Outfit"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-padding-top: 5rem; }
+    body { font-family: 'Outfit', sans-serif; color: hsl(222.2, 84%, 4.9%); }
+    h1, h2 { font-family: 'Lora', serif; font-weight: 400; font-feature-settings: 'liga' 0; }
+
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    [data-animate].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 500px;
+    }
+
+    *:focus-visible {
+      outline: 2px solid #0247BB;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .btn-accent:hover { background-color: #E5640B; transform: scale(1.03); }
+    .btn-accent { transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+
+    .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #FF710D, #0247BB);
+      transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-gradient:hover {
+      filter: brightness(1.1);
+      transform: scale(1.03);
+      box-shadow: 0 0 24px rgba(255, 113, 13, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-white antialiased">
+
+  <!-- Skip to content -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg font-body text-sm">Skip to content</a>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav aria-label="Main navigation" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="#" class="flex items-baseline gap-0.5">
+        <span class="font-heading text-primary text-xl">MomUp</span>
+        <span class="font-body text-accent text-xl">Studio</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#how-it-works" class="font-body font-medium text-sm text-gray-800 hover:text-primary transition-colors">How It Works</a>
+        <a href="#pricing" class="font-body font-medium text-sm text-gray-800 hover:text-primary transition-colors">Pricing</a>
+        <a href="#faq" class="font-body font-medium text-sm text-gray-800 hover:text-primary transition-colors">FAQ</a>
+        <a href="/start" class="btn-accent inline-block bg-accent text-white font-body font-semibold text-sm px-6 py-3 rounded-lg shadow-sm">
+          Start My Plan &rarr;
+        </a>
+      </div>
+
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-border">
+      <div class="px-4 py-6 flex flex-col gap-4">
+        <a href="#how-it-works" class="mobile-nav-link font-body font-medium text-base text-gray-800 py-2">How It Works</a>
+        <a href="#pricing" class="mobile-nav-link font-body font-medium text-base text-gray-800 py-2">Pricing</a>
+        <a href="#faq" class="mobile-nav-link font-body font-medium text-base text-gray-800 py-2">FAQ</a>
+        <a href="/start" class="btn-accent inline-block bg-accent text-white font-body font-semibold text-base text-center px-6 py-3 rounded-lg shadow-sm mt-2">
+          Start My Plan &rarr;
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ==================== HERO ==================== -->
+    <section data-section="hero" class="bg-primary pt-24 pb-16 md:pt-28 md:pb-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+
+          <div class="lg:col-span-3" data-animate>
+            <p class="font-body font-medium text-[13px] uppercase tracking-[0.15em] text-white/70 mb-5">
+              AI CAREER CONCIERGE <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent mx-2 align-middle"></span> BUILT FOR WOMEN IN TRANSITION
+            </p>
+
+            <h1 class="font-heading text-white text-[32px] md:text-[48px] leading-[1.4] mb-5">
+              Stop guessing your way through your job search.
+            </h1>
+
+            <p class="font-body text-white/80 text-lg max-w-xl mb-4 leading-relaxed">
+              MomUp Studio builds your plan, rewrites your materials, and delivers a curated list of the right roles, then tells you exactly what to do next.
+            </p>
+
+            <p class="font-body font-medium text-white text-base mb-8">
+              Get your first plan within 24 hours.
+            </p>
+
+            <a href="/start" id="hero-cta-primary" class="btn-accent inline-block bg-accent text-white font-body font-semibold text-lg text-center px-8 py-4 rounded-lg shadow-md mb-4">
+              Start My Plan
+            </a>
+
+            <p class="font-body text-sm text-white/60 flex items-center gap-2 mt-2">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+              Built by recruiters who've placed hundreds of professionals since 2018.
+            </p>
+          </div>
+
+          <!-- Right column — mock daily plan card -->
+          <div class="lg:col-span-2" data-animate>
+            <div class="bg-white rounded-lg shadow-xl p-5 max-w-sm mx-auto lg:mx-0">
+              <p class="font-body font-semibold text-sm text-gray-800 mb-4">Today's Action Plan</p>
+
+              <div class="flex items-start gap-3 py-3 px-4 border-l-[3px] border-accent bg-white rounded-r-md mb-2">
+                <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="flex-1">
+                  <p class="font-body text-sm text-gray-800">Review tailored resume for UX Lead role</p>
+                </div>
+                <span class="font-body text-xs font-medium text-accent bg-accent/10 px-2 py-0.5 rounded-full shrink-0">Complete</span>
+              </div>
+
+              <div class="flex items-start gap-3 py-3 px-4 border-l-[3px] border-primary bg-white rounded-r-md mb-2">
+                <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                <div class="flex-1">
+                  <p class="font-body text-sm text-gray-800">Send outreach message to hiring manager</p>
+                </div>
+                <span class="font-body text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full shrink-0">Next</span>
+              </div>
+
+              <div class="flex items-start gap-3 py-3 px-4 border-l-[3px] border-border bg-white rounded-r-md">
+                <svg class="w-5 h-5 text-muted-fg shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div class="flex-1">
+                  <p class="font-body text-sm text-gray-800">Prep for behavioral interview questions</p>
+                </div>
+                <span class="font-body text-xs font-medium text-muted-fg bg-muted px-2 py-0.5 rounded-full shrink-0">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STATS BAR ==================== -->
+    <div class="bg-white py-8 border-b border-border" data-animate>
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div class="text-center">
+          <p class="font-body font-bold text-3xl text-primary">3</p>
+          <p class="font-body text-sm text-muted-fg mt-1">Paths — Personalized to your background</p>
+        </div>
+        <div class="text-center">
+          <p class="font-body font-bold text-3xl text-primary">7</p>
+          <p class="font-body text-sm text-muted-fg mt-1">Moves — Max daily actions, no overwhelm</p>
+        </div>
+        <div class="text-center">
+          <p class="font-body font-bold text-3xl text-primary">5</p>
+          <p class="font-body text-sm text-muted-fg mt-1">Pursuits — Active at a time, focused not scattered</p>
+        </div>
+        <div class="text-center">
+          <p class="font-body font-bold text-3xl text-primary">$247</p>
+          <p class="font-body text-sm text-muted-fg mt-1">One-time, 6 months access</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PAIN SECTION ==================== -->
+    <section id="pain" data-section="pain" class="bg-white py-16 md:py-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-10" data-animate>
+            <p class="font-body font-medium text-[13px] uppercase tracking-[0.15em] text-accent mb-4">DOES THIS SOUND FAMILIAR?</p>
+            <h2 class="font-heading text-[28px] md:text-[40px] leading-[1.3] text-gray-900">You don't need to try harder. You need a different approach.</h2>
+          </div>
+
+          <ul class="space-y-5 mb-10" data-animate>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-muted-fg/50 shrink-0 mt-2.5"></span>
+              <p class="font-body text-lg text-muted-fg leading-relaxed">You've applied to dozens of jobs and heard back from almost none</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-muted-fg/50 shrink-0 mt-2.5"></span>
+              <p class="font-body text-lg text-muted-fg leading-relaxed">You're not even sure what roles you're actually qualified for anymore</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-muted-fg/50 shrink-0 mt-2.5"></span>
+              <p class="font-body text-lg text-muted-fg leading-relaxed">Your experience doesn't translate the way it used to</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-muted-fg/50 shrink-0 mt-2.5"></span>
+              <p class="font-body text-lg text-muted-fg leading-relaxed">You don't know what to do first, next, or at all</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-muted-fg/50 shrink-0 mt-2.5"></span>
+              <p class="font-body text-lg text-muted-fg leading-relaxed">You don't have time to figure this out through trial and error</p>
+            </li>
+          </ul>
+
+          <p class="text-center font-body font-medium text-xl text-gray-900 italic" data-animate>
+            And "just start applying" isn't working.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TRANSITION BLOCK ==================== -->
+    <section data-section="transition" class="bg-cream py-14 md:py-16">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center" data-animate>
+        <p class="font-body text-xl md:text-2xl text-gray-800 leading-relaxed max-w-2xl mx-auto mb-4">
+          Most job searches don't fail because people aren't capable. They fail because there's no structure.
+        </p>
+        <p class="font-body font-semibold text-2xl md:text-3xl text-primary">
+          MomUp Studio fixes that.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section id="how-it-works" data-section="how-it-works" class="bg-white py-16 md:py-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-animate>
+          <h2 class="font-heading text-[28px] md:text-[40px] leading-[1.3] text-gray-900">How MomUp Studio Works</h2>
+        </div>
+
+        <!-- Timeline -->
+        <div class="max-w-3xl mx-auto relative">
+          <div class="absolute left-5 md:left-6 top-0 bottom-0 w-0.5 bg-border" aria-hidden="true"></div>
+
+          <!-- Phase 1 -->
+          <div class="relative pl-16 md:pl-20 pb-16" data-animate>
+            <div class="absolute left-0 w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center z-10">
+              <span class="font-body font-bold text-white text-base">1</span>
+            </div>
+            <h3 class="font-body font-semibold text-xl md:text-2xl text-gray-900 mb-2">Pathfind — Get Clear on Where You're Going</h3>
+            <p class="font-body text-base text-muted-fg leading-relaxed">We don't give you endless options. We define a focused set of high-fit career paths based on your experience, with clear insight into what those roles actually look like and what they pay.</p>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="relative pl-16 md:pl-20 pb-16" data-animate>
+            <div class="absolute left-0 w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center z-10">
+              <span class="font-body font-bold text-white text-base">2</span>
+            </div>
+            <h3 class="font-body font-semibold text-xl md:text-2xl text-gray-900 mb-2">Prepare — Build Materials That Actually Match the Role</h3>
+            <p class="font-body text-base text-muted-fg leading-relaxed">We don't just "optimize" your resume. We rewrite your resume, LinkedIn, and positioning around your target role, including interview prep and salary negotiation scripts, so you show up as a clear fit.</p>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="relative pl-16 md:pl-20" data-animate>
+            <div class="absolute left-0 w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center z-10">
+              <span class="font-body font-bold text-white text-base">3</span>
+            </div>
+            <h3 class="font-body font-semibold text-xl md:text-2xl text-gray-900 mb-2">Pursue — Focus Only on What Moves You Forward</h3>
+            <p class="font-body text-base text-muted-fg leading-relaxed">We surface a curated list of relevant roles and tell you exactly what to do each day. No endless scrolling. No spray-and-pray. Just a short list of high-impact actions so you actually make progress and start getting responses.</p>
+          </div>
+        </div>
+
+        <!-- Footer notes -->
+        <div class="max-w-2xl mx-auto mt-12 space-y-3" data-animate>
+          <p class="font-body text-sm text-muted-fg text-center italic">The AI does the drafting. The strategy, priorities, and decisions come from years of real recruiting experience.</p>
+          <p class="font-body text-sm text-muted-fg text-center italic">Most people spend 5-30 minutes a day following their plan. Some steps take just a few minutes. Others go deeper when you're ready.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-10" data-animate>
+          <a href="/start" class="btn-accent inline-block bg-accent text-white font-body font-semibold text-lg px-8 py-4 rounded-lg shadow-md">
+            Start My Plan
+          </a>
+          <p class="font-body text-sm text-muted-fg mt-3">Know exactly what to do next within 24 hours.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== COMPARISON ==================== -->
+    <section id="comparison" data-section="comparison" class="bg-cream py-16 md:py-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10" data-animate>
+          <h2 class="font-heading text-[28px] md:text-[36px] leading-[1.3] text-gray-900">Most job searches give you more options.<br class="hidden md:inline"> MomUp Studio gives you direction.</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden" data-animate>
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-border">
+                <th scope="col" class="font-body font-semibold text-base text-muted-fg text-left px-6 py-4 w-1/2">Traditional Approach</th>
+                <th scope="col" class="font-body font-semibold text-base text-gray-900 text-left px-6 py-4 w-1/2">MomUp Studio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-border">
+                <td class="px-6 py-4 font-body text-base text-muted-fg">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-muted-fg/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Endless job listings</span>
+                </td>
+                <td class="px-6 py-4 font-body text-base text-gray-800 bg-cream/50">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Curated, high-fit roles</span>
+                </td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="px-6 py-4 font-body text-base text-muted-fg">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-muted-fg/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> You figure out your direction</span>
+                </td>
+                <td class="px-6 py-4 font-body text-base text-gray-800 bg-cream/50">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> We define your path first</span>
+                </td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="px-6 py-4 font-body text-base text-muted-fg">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-muted-fg/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Generic resume advice</span>
+                </td>
+                <td class="px-6 py-4 font-body text-base text-gray-800 bg-cream/50">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Materials built for your target role</span>
+                </td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="px-6 py-4 font-body text-base text-muted-fg">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-muted-fg/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Apply to everything</span>
+                </td>
+                <td class="px-6 py-4 font-body text-base text-gray-800 bg-cream/50">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Focus on a small number of high-fit roles</span>
+                </td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="px-6 py-4 font-body text-base text-muted-fg">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-muted-fg/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> No clear plan</span>
+                </td>
+                <td class="px-6 py-4 font-body text-base text-gray-800 bg-cream/50">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Daily, prioritized next steps</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-body text-base text-muted-fg">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-muted-fg/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Do it alone</span>
+                </td>
+                <td class="px-6 py-4 font-body text-base text-gray-800 bg-cream/50">
+                  <span class="flex items-start gap-2"><svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Built on real recruiting experience</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-center mt-10" data-animate>
+          <a href="/start" class="btn-accent inline-block bg-accent text-white font-body font-semibold text-lg px-8 py-4 rounded-lg shadow-md">
+            Start My Plan
+          </a>
+          <p class="font-body font-medium text-base text-gray-900 mt-3 italic">Stop guessing. Start with a system.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section id="testimonials" data-section="testimonials" class="bg-white py-16 md:py-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10" data-animate>
+          <h2 class="font-heading text-[28px] md:text-[36px] leading-[1.3] text-gray-900">What people say after using Studio</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-white shadow-md rounded-lg p-10 card-hover border border-border" data-animate>
+            <div class="flex gap-1 mb-4">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <blockquote class="font-body text-base text-gray-800 leading-relaxed mb-6">
+              I was applying to everything for months with no response. Within two weeks of using Studio, I had a clear target role, a completely rewritten resume, and three interviews lined up. The daily plan made it feel manageable for the first time.
+            </blockquote>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                <span class="font-body font-semibold text-white text-base">S</span>
+              </div>
+              <div>
+                <cite class="font-body font-semibold text-sm text-gray-900 not-italic">Sarah M.</cite>
+                <p class="font-body text-sm text-muted-fg">Marketing Director</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white shadow-md rounded-lg p-10 card-hover border border-border" data-animate>
+            <div class="flex gap-1 mb-4">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <blockquote class="font-body text-base text-gray-800 leading-relaxed mb-6">
+              I didn't realize how scattered my search was until MomUp showed me exactly what to focus on. Once I had direction, the system handled the rest — where to apply, what to say, how to follow up. It just worked.
+            </blockquote>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                <span class="font-body font-semibold text-white text-base">J</span>
+              </div>
+              <div>
+                <cite class="font-body font-semibold text-sm text-gray-900 not-italic">Jennifer K.</cite>
+                <p class="font-body text-sm text-muted-fg">Operations Manager</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white shadow-md rounded-lg p-10 card-hover border border-border" data-animate>
+            <div class="flex gap-1 mb-4">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <blockquote class="font-body text-base text-gray-800 leading-relaxed mb-6">
+              After a 5-year career break, I felt invisible. MomUp helped me reframe everything around my strengths instead of my gap. I had my first offer within six weeks. I couldn't have done it alone.
+            </blockquote>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                <span class="font-body font-semibold text-white text-base">R</span>
+              </div>
+              <div>
+                <cite class="font-body font-semibold text-sm text-gray-900 not-italic">Rachel T.</cite>
+                <p class="font-body text-sm text-muted-fg">Project Manager</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center mt-8 font-body text-sm text-muted-fg italic" data-animate>Names and details changed to protect privacy. Based on early user outcomes.</p>
+      </div>
+    </section>
+
+    <!-- ==================== PRICING ==================== -->
+    <section id="pricing" data-section="pricing" class="bg-cream py-16 md:py-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10" data-animate>
+          <h2 class="font-heading text-[28px] md:text-[40px] leading-[1.3] text-gray-900">One plan. Everything included.</h2>
+        </div>
+
+        <div class="max-w-lg mx-auto bg-white border-2 border-accent rounded-lg p-8 md:p-12 shadow-lg" data-animate>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="font-heading text-[56px] text-gray-900">$247</span>
+            <span class="font-body text-lg text-muted-fg">6 months access</span>
+          </div>
+
+          <div class="border-t border-border my-6"></div>
+
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Career path clarity and direction</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Resume and LinkedIn rewritten for your target role</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Interview prep and salary negotiation scripts</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Curated, high-fit job opportunities</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Outreach and follow-up guidance</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Daily plan with clear next steps</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="font-body text-base text-gray-800">Access to real MomUp support when you need it</span>
+            </li>
+          </ul>
+
+          <!-- Guarantee -->
+          <div class="bg-cream rounded-lg p-5 mb-8">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <p class="font-body font-semibold text-base text-gray-900 mb-1">30-Day Guarantee</p>
+                <p class="font-body text-sm text-muted-fg">If it's not helping, you get your money back. No questions asked. No hoops to jump through.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="/start" id="pricing-cta" class="btn-accent block w-full bg-accent text-white font-body font-semibold text-lg text-center py-4 rounded-lg shadow-md">
+            Start My Plan
+          </a>
+          <p class="font-body text-sm text-muted-fg text-center mt-3">Start today. See your plan within 24 hours.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq" data-section="faq" class="bg-white py-16 md:py-20">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10" data-animate>
+          <h2 class="font-heading text-[28px] md:text-[36px] leading-[1.3] text-gray-900">Honest answers.</h2>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-4" data-animate>
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">What if I don't know what roles I want?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">That's exactly where we start. Pathfind defines the best-fit directions based on your experience.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">Is this just AI-generated advice?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">No. The AI handles execution. The system itself is built on how recruiters actually evaluate candidates.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">Why should I trust this?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">Because it's based on real hiring experience. MomUp has placed candidates in real roles. This reflects what actually works.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">Is this for people returning to work or actively job searching?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">Both. Whether you're re-entering, pivoting, or already applying, this gives you structure and direction.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">What if I'm not good with technology or AI?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">You don't need to be. You answer simple questions and follow the plan. Studio handles the rest.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">How much time does this take?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">Most people spend about 20 minutes a day. Some steps are quick, like reviewing a job match or sending a message. Others take a bit longer when you're ready to dig in, like reviewing your resume draft or prepping for an interview.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-border rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+              <span class="font-body font-semibold text-base text-gray-900 pr-4">What happens after 6 months?</span>
+              <span class="faq-icon text-accent text-2xl font-body font-light shrink-0 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="px-6 pb-5">
+                <p class="font-body text-base text-muted-fg leading-relaxed">You keep everything you've built. The goal is that you won't need it anymore.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FINAL CLOSE ==================== -->
+    <section data-section="final-cta" class="bg-primary">
+      <div class="py-16 md:py-20">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center" data-animate>
+          <h2 class="font-heading text-[30px] md:text-[44px] leading-[1.4] text-white mb-5">You don't need to do more. You need to do the right things.</h2>
+          <p class="font-body text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-3">
+            Right now, your job search probably feels scattered, frustrating, and unclear.
+          </p>
+          <p class="font-body text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-3">
+            This gives you structure, direction, and a clear path forward.
+          </p>
+          <p class="font-body text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-8 font-medium">
+            You could spend weeks figuring this out. Or you could have a plan by tomorrow.
+          </p>
+          <a href="/start" id="footer-cta" class="btn-gradient inline-block text-white font-body font-semibold text-lg px-10 py-4 rounded-lg">
+            Start My Plan
+          </a>
+          <p class="font-body text-sm text-white/50 mt-4 flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            30-day money-back guarantee. No risk.
+          </p>
+        </div>
+      </div>
+
+      <footer class="border-t border-white/10">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+              <a href="#" class="inline-flex items-baseline gap-0.5">
+                <span class="font-heading text-white text-lg">MomUp</span>
+                <span class="font-body text-accent text-lg">Studio</span>
+              </a>
+              <p class="font-body text-sm text-white/50 mt-1">Structure. Direction. Results.</p>
+            </div>
+            <div class="flex items-center gap-6">
+              <a href="#" class="font-body text-sm text-white/50 hover:text-accent transition-colors">Privacy Policy</a>
+              <a href="#" class="font-body text-sm text-white/50 hover:text-accent transition-colors">Terms of Service</a>
+              <a href="#" class="font-body text-sm text-white/50 hover:text-accent transition-colors">Contact</a>
+            </div>
+            <p class="font-body text-sm text-white/50 text-center md:text-right">&copy; 2026 MomUp Studio. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuToggle.setAttribute('aria-expanded', !isOpen);
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.focus();
+      }
+    });
+
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-icon');
+        const isOpen = answer.classList.contains('open');
+        answer.classList.toggle('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+        icon.textContent = isOpen ? '+' : '\u00d7';
+        icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
